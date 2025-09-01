@@ -6,41 +6,28 @@
 
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <form id="tag-form" action="{{ route('tags.store') }}" method="POST" class="bg-white p-6 shadow rounded-lg space-y-6">
-                        <header>
-                            <h2 class="text-lg font-medium text-gray-900">
-                                {{ __('Create Tag') }}
-                            </h2>
-                        </header>
-                        @csrf
-                        <div id="tag-success" class="hidden rounded-md bg-green-50 p-4 text-green-800 text-sm"></div>
-                        @include('tags.form')
-                        <div class="flex justify-end space-x-2">
-                            <a href="{{ route('tags.index') }}" class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-50">Cancel</a>
-                            <x-primary-button> Create </x-primary-button>
-                        </div>
-                    </form>
+    <x-card-section>
+        <form id="tag-form" action="{{ route('tags.store') }}" method="POST" class="space-y-6">
+            <header>
+                <h2 class="text-lg font-medium text-gray-900">
+                    {{ __('Create Tag') }}
+                </h2>
+            </header>
+            @csrf
+            <div id="tag-success" class="hidden rounded-md bg-green-50 p-4 text-green-800 text-sm"></div>
+            @include('tags.form')
+            <div class="flex justify-end space-x-2">
+                <a href="{{ route('tags.index') }}" class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-50">Cancel</a>
+                <x-primary-button> Create </x-primary-button>
             </div>
-        </div>
-    </div>
+        </form>
+    </x-card-section>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <div class="max-w-7xl mx-auto p-4">
-
-                        <div id="tags-container">
-                            @include('tags.table', ['tags' => $tags])
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <x-card-section>
+        <div id="tags-container">
+            @include('tags.table', ['tags' => $tags])
         </div>
-    </div>
+    </x-card-section>
 </x-app-layout>
 
 <script>
