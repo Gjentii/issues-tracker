@@ -45,6 +45,7 @@
         </div>
 
         @include('projects.issuess.modal')
+        @include('projects.issuess.view-modal')
         <x-delete-modal modalId="delete-modal" title="Delete Item" message="This action cannot be undone." />
     </x-card-section>
 </x-app-layout>

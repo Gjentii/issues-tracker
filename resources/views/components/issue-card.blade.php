@@ -55,7 +55,17 @@
 
     <div class="mt-5 flex items-center justify-end gap-2">
         @if($viewUrl)
-            <a href="{{ $viewUrl }}" class="inline-flex h-9 items-center rounded-md border border-gray-300 bg-white px-3 text-xs font-medium text-gray-700 hover:bg-gray-50">View</a>
+            <a href="#" role="button"
+               data-open-modal="issue-view-modal"
+               data-title="{{ $issue->title }}"
+               data-description="{{ $issue->description }}"
+               data-status="{{ $issue->status }}"
+               data-priority="{{ $issue->priority }}"
+               data-due_date="{{ $issue->due_date }}"
+               data-project="{{ optional($issue->project)->name }}"
+               class="inline-flex h-9 items-center rounded-md border border-gray-300 bg-white px-3 text-xs font-medium text-gray-700 hover:bg-gray-50">
+               View
+            </a>
         @endif
         @if($editUrl)
             <a href="#" role="button"
