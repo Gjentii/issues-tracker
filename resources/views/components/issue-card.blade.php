@@ -29,31 +29,32 @@
     $cardId = 'issue-card-'.($issue->id ?? uniqid());
 @endphp
 
-<div id="{{ $cardId }}" class="group relative rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+<div id="{{ $cardId }}" class="group relative h-full rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md flex flex-col">
     <div class="absolute inset-x-0 -top-px h-1 rounded-t-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-80"></div>
 
-    <div class="flex items-start justify-between gap-3">
-        <h3 class="text-base font-semibold text-gray-900 truncate" title="{{ $title }}">{{ $title }}</h3>
-        <div class="flex items-center gap-2">
-            @if($status)
-                <span class="shrink-0 rounded-full px-2 py-0.5 text-xs font-medium {{ $statusClass }}">{{ ucfirst($status) }}</span>
-            @endif
-            @if($priority)
-                <span class="shrink-0 rounded-full px-2 py-0.5 text-xs font-medium border {{ $priorityClass }}">{{ ucfirst($priority) }}</span>
-            @endif
+    <div class="flex-1">
+        <div class="flex items-start justify-between gap-3">
+            <h3 class="text-base font-semibold text-gray-900 truncate" title="{{ $title }}">{{ $title }}</h3>
+            <div class="flex items-center gap-2">
+                @if($status)
+                    <span class="shrink-0 rounded-full px-2 py-0.5 text-xs font-medium {{ $statusClass }}">{{ ucfirst($status) }}</span>
+                @endif
+                @if($priority)
+                    <span class="shrink-0 rounded-full px-2 py-0.5 text-xs font-medium border {{ $priorityClass }}">{{ ucfirst($priority) }}</span>
+                @endif
+            </div>
         </div>
+
+        @if($description)
+            <p class="mt-3 text-sm leading-6 text-gray-600 max-h-20 overflow-hidden">{{ $description }}</p>
+        @endif
+
+        @if($due)
+            <div class="mt-1 text-xs text-gray-500">Due: <span class="font-medium text-gray-700">{{ \Illuminate\Support\Carbon::parse($due)->toFormattedDateString() }}</span></div>
+        @endif
     </div>
 
-    @if($description)
-        <p class="mt-3 text-sm leading-6 text-gray-600 max-h-20 overflow-hidden">{{ $description }}</p>
-    @endif
-
-    @if($due)
-        <div class="mt-1 text-xs text-gray-500">Due: <span class="font-medium text-gray-700">{{ \Illuminate\Support\Carbon::parse($due)->toFormattedDateString() }}</span></div>
-    @endif
-
-
-    <div class="mt-5 flex items-center justify-end gap-2">
+    <div class="mt-auto pt-4 flex items-center justify-end gap-2">
         @if($viewUrl)
             <a href="#" role="button"
                data-open-modal="issue-view-modal"
