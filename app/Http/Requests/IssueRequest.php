@@ -24,10 +24,10 @@ class IssueRequest extends FormRequest
         return [
             'project_id' => ['required', 'exists:projects,id'],
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
+            'description' => ['required', 'string'],
             'status' => ['required', 'in:open,in_progress,closed'],
             'priority' => ['required', 'in:low,medium,high'],
-            'due_date' => ['nullable', 'date'],
+            'due_date' => ['required', 'date'],
         ];
     }
 }

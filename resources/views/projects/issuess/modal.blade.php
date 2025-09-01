@@ -25,7 +25,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                     <x-input-label for="issue-status" value="Status" />
-                    <select id="issue-status" name="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <select id="issue-status" name="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" >
                         <option value="open">Open</option>
                         <option value="in_progress">In Progress</option>
                         <option value="closed">Closed</option>
