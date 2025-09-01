@@ -18,6 +18,7 @@
             <h3 class="text-lg font-semibold text-gray-900">Issues</h3>
             <x-primary-button type="button" id="open-issue-modal">New Issue</x-primary-button>
         </div>
+        <div id="issues-success" class="hidden rounded-md bg-green-50 p-4 text-green-800 text-sm mb-4"></div>
         @php($issues = $project->issues()->latest()->get())
         @if($issues->isEmpty())
             <p class="text-sm text-gray-500" id="no-issues-msg">No issues yet for this project.</p>
@@ -36,5 +37,6 @@
         </div>
 
         @include('projects.issuess.modal')
+        <x-delete-modal modalId="delete-modal" title="Delete Item" message="This action cannot be undone." />
     </x-card-section>
 </x-app-layout>

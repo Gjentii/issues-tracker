@@ -31,4 +31,18 @@ class IssueController extends Controller
 
         return redirect()->back();
     }
+
+    public function destroy(Request $request, Issue $issue): RedirectResponse|JsonResponse
+    {
+        $issue->delete();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Issue deleted successfully.',
+                'id' => $issue->id,
+            ]);
+        }
+
+        return redirect()->back();
+    }
 }

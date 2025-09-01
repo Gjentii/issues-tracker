@@ -26,9 +26,10 @@
     ];
 
     $statusClass = $statusStyles[$status] ?? 'bg-gray-100 text-gray-700 border-gray-200';
+    $cardId = 'issue-card-'.($issue->id ?? uniqid());
 @endphp
 
-<div class="group relative rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+<div id="{{ $cardId }}" class="group relative rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
     <div class="absolute inset-x-0 -top-px h-1 rounded-t-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-80"></div>
 
     <div class="flex items-start justify-between gap-3">
@@ -60,11 +61,17 @@
             <a href="{{ $editUrl }}" class="inline-flex h-9 items-center rounded-md bg-indigo-600 px-3 text-xs font-medium text-white shadow-sm hover:bg-indigo-500">Edit</a>
         @endif
         @if($deleteUrl)
-            <form action="{{ $deleteUrl }}" method="POST" class="inline" onsubmit="return confirm('Delete this issue?')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="inline-flex h-9 items-center rounded-md bg-red-600 px-3 text-xs font-medium text-white shadow-sm hover:bg-red-500">Delete</button>
-            </form>
+            <button type="button"
+                data-open-modal="delete-modal"
+                data-action="{{ $deleteUrl }}"
+                data-method="DELETE"
+                data-name="{{ $title }}"
+                data-remove="#{{ $cardId }}"
+                data-success="#issues-success"
+                data-success-message="Issue deleted successfully."
+                class="inline-flex h-9 items-center rounded-md bg-red-600 px-3 text-xs font-medium text-white shadow-sm hover:bg-red-500">
+                Delete
+            </button>
         @endif
     </div>
 </div>
