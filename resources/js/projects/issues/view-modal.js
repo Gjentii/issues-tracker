@@ -1,0 +1,68 @@
+(() => {
+  const modal = document.getElementById('issue-view-modal');
+  if (!modal) return;
+  const btnClose = document.getElementById('issue-view-close');
+  const btnOk = document.getElementById('issue-view-ok');
+  const overlay = modal.querySelector('[data-close="issue-view-modal"]');
+
+  const elTitle = document.getElementById('view-issue-title');
+  const elDesc = document.getElementById('view-issue-description');
+  const elDue = document.getElementById('view-issue-due');
+  const elProject = document.getElementById('view-issue-project');
+  const elStatus = document.getElementById('view-issue-status');
+  const elPriority = document.getElementById('view-issue-priority');
+
+  function setBadge(el, value, map){
+    if (!el) return;
+    if (!value){ el.classList.add('hidden'); el.textContent = ''; return; }
+    const styles = map[value] || map._default;
+    el.className = 'shrink-0 rounded-full px-2 py-0.5 text-xs font-medium border ' + styles;
+    el.textContent = value.replace('_',' ').replace(/\b\w/g, c => c.toUpperCase());
+    el.classList.remove('hidden');
+  }
+
+  const statusMap = {
+    open: 'bg-green-100 text-green-800 border-green-200',
+    in_progress: 'bg-blue-100 text-blue-800 border-blue-200',
+    closed: 'bg-gray-100 text-gray-800 border-gray-200',
+    _default: 'bg-gray-100 text-gray-800 border-gray-200',
+  };
+  const priorityMap = {
+    low: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+    medium: 'bg-amber-100 text-amber-800 border-amber-200',
+    high: 'bg-red-100 text-red-800 border-red-200',
+    _default: 'bg-gray-100 text-gray-800 border-gray-200',
+  };
+
+  function open(opener){
+    const ds = opener?.dataset || {};
+    if (elTitle) elTitle.textContent = ds.title || '—';
+    if (elDesc) elDesc.textContent = ds.description || '';
+    if (elDue) elDue.textContent = ds.due_date || '—';
+    if (elProject) elProject.textContent = ds.project || '—';
+    setBadge(elStatus, ds.status, statusMap);
+    setBadge(elPriority, ds.priority, priorityMap);
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.classList.add('overflow-hidden');
+  }
+
+  function close(){
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+  }
+
+  // Delegated open
+  document.addEventListener('click', (e) => {
+    const opener = e.target.closest('[data-open-modal="issue-view-modal"]');
+    if (opener){ e.preventDefault(); open(opener); }
+  });
+
+  btnClose && btnClose.addEventListener('click', close);
+  btnOk && btnOk.addEventListener('click', close);
+  overlay && overlay.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+})();
+
