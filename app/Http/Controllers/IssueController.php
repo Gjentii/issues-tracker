@@ -32,6 +32,28 @@ class IssueController extends Controller
         return redirect()->back();
     }
 
+    public function update(IssueRequest $request, Issue $issue): RedirectResponse|JsonResponse
+    {
+        $issue->update($request->validated());
+
+        if ($request->expectsJson()) {
+            $html = view('components.issue-card', [
+                'issue' => $issue->fresh(),
+                'viewUrl' => route('issues.show', $issue),
+                'editUrl' => route('issues.edit', $issue),
+                'deleteUrl' => route('issues.destroy', $issue),
+            ])->render();
+
+            return response()->json([
+                'message' => 'Issue updated successfully.',
+                'issue' => $issue->toArray(),
+                'html' => $html,
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
     public function destroy(Request $request, Issue $issue): RedirectResponse|JsonResponse
     {
         $issue->delete();

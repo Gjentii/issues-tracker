@@ -16,7 +16,15 @@
     <x-card-section>
         <div class="mb-4 flex items-center justify-between">
             <h3 class="text-lg font-semibold text-gray-900">Issues</h3>
-            <x-primary-button type="button" id="open-issue-modal">New Issue</x-primary-button>
+            <x-primary-button type="button" id="open-issue-modal"
+                data-open-modal="issue-modal"
+                data-mode="create"
+                data-action="{{ route('issues.store') }}"
+                data-method="POST"
+                data-success="#issues-success"
+                data-success-message="Issue created successfully.">
+                New Issue
+            </x-primary-button>
         </div>
         <div id="issues-success" class="hidden rounded-md bg-green-50 p-4 text-green-800 text-sm mb-4"></div>
         @php($issues = $project->issues()->latest()->get())

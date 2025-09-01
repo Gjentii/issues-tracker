@@ -3,7 +3,7 @@
     <div class="absolute inset-0 bg-gray-900/60"></div>
     <div class="relative w-full max-w-xl rounded-lg bg-white p-6 shadow-lg">
         <div class="flex items-center justify-between">
-            <h4 class="text-lg font-semibold text-gray-900">Create Issue</h4>
+            <h4 id="issue-modal-title" class="text-lg font-semibold text-gray-900">Create Issue</h4>
             <button type="button" id="close-issue-modal" class="rounded p-1 text-gray-500 hover:bg-gray-100">✕</button>
         </div>
         <form id="issue-form" action="{{ route('issues.store') }}" method="POST" class="mt-4 space-y-4">
@@ -49,12 +49,12 @@
     </div>
 
 
-            <div class="mt-6 flex justify-end gap-2">
+                    <div class="mt-6 flex justify-end gap-2">
                 <button type="button" id="cancel-issue-modal" class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
-                <x-primary-button type="submit">Create</x-primary-button>
+                <x-primary-button type="submit" id="issue-submit">Create</x-primary-button>
             </div>
         </form>
-</div>
+    </div>
     </div>
 <script>
 {!! file_get_contents(resource_path('js/projects/issues/modal.js')) !!}
