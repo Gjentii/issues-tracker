@@ -2,9 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IssueRequest;
+use App\Models\Issue;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class IssueController extends Controller
 {
-    //
+    public function store(IssueRequest $request): RedirectResponse|JsonResponse
+    {
+        $issue = Issue::create($request->validated());
+
+        if ($request->expectsJson()) {
+            $html = view('components.issue-card', [
+                'issue' => $issue,
+                'viewUrl' => route('issues.show', $issue),
+                'editUrl' => route('issues.edit', $issue),
+                'deleteUrl' => route('issues.destroy', $issue),
+            ])->render();
+
+            return response()->json([
+                'message' => 'Issue created successfully.',
+                'issue' => $issue->toArray(),
+                'html' => $html,
+            ], 201);
+        }
+
+        return redirect()->back();
+    }
 }

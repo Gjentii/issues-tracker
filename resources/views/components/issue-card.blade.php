@@ -16,9 +16,16 @@
         'low' => 'bg-green-100 text-gray-700 border-green-200',
         'medium' => 'bg-amber-100 text-amber-800 border-amber-200',
         'high' => 'bg-red-100 text-red-800 border-red-200',
-        'urgent' => 'bg-red-100 text-red-800 border-red-200',
     ];
     $priorityClass = $priorityStyles[$priority] ?? 'bg-gray-100 text-gray-700 border-gray-200';
+
+    $statusStyles = [
+        'open' => 'bg-green-100 text-gray-700 border-green-200',
+        'in_progress' => 'bg-green-100 text-gray-700 border-green-200',
+        'closed' => 'bg-red-100 text-red-800 border-red-200',
+    ];
+
+    $statusClass = $statusStyles[$status] ?? 'bg-gray-100 text-gray-700 border-gray-200';
 @endphp
 
 <div class="group relative rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
@@ -28,7 +35,7 @@
         <h3 class="text-base font-semibold text-gray-900 truncate" title="{{ $title }}">{{ $title }}</h3>
         <div class="flex items-center gap-2">
             @if($status)
-                <span class="shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700 border border-gray-200">{{ ucfirst($status) }}</span>
+                <span class="shrink-0 rounded-full px-2 py-0.5 text-xs font-medium {{ $statusClass }}">{{ ucfirst($status) }}</span>
             @endif
             @if($priority)
                 <span class="shrink-0 rounded-full px-2 py-0.5 text-xs font-medium border {{ $priorityClass }}">{{ ucfirst($priority) }}</span>
