@@ -45,11 +45,14 @@
                     <x-input-label for="issue-due-date" value="Due Date" />
                     <input id="issue-due-date" name="due_date" type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                     <ul id="error-due_date" class="mt-2 text-sm text-red-600 space-y-1 hidden"></ul>
-</div>
-    </div>
+                </div>
+            </div>
+
+            {{-- Tags selection --}}
+            @include('tags.partials.checkboxes')
 
 
-                    <div class="mt-6 flex justify-end gap-2">
+            <div class="mt-6 flex justify-end gap-2">
                 <button type="button" id="cancel-issue-modal" class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
                 <x-primary-button type="submit" id="issue-submit">Create</x-primary-button>
             </div>

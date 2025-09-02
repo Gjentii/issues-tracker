@@ -13,10 +13,12 @@ class IssueController extends Controller
     public function store(IssueRequest $request): RedirectResponse|JsonResponse
     {
         $issue = Issue::create($request->validated());
+        // Attach selected tags (attach none if not provided)
+        $issue->tags()->sync($request->input('tags', []));
 
         if ($request->expectsJson()) {
             $html = view('components.issue-card', [
-                'issue' => $issue,
+                'issue' => $issue->fresh(),
                 'viewUrl' => route('issues.show', $issue),
                 'editUrl' => route('issues.edit', $issue),
                 'deleteUrl' => route('issues.destroy', $issue),
@@ -35,6 +37,8 @@ class IssueController extends Controller
     public function update(IssueRequest $request, Issue $issue): RedirectResponse|JsonResponse
     {
         $issue->update($request->validated());
+        // Sync tags to reflect current selection (attach/detach)
+        $issue->tags()->sync($request->input('tags', []));
 
         if ($request->expectsJson()) {
             $html = view('components.issue-card', [
