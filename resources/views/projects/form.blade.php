@@ -13,14 +13,14 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
             <x-input-label for="start_date" value="Start Date" />
-            <x-text-input id="start_date" name="start_date" type="date" class="mt-1 block w-full"
-                          value="{{ old('start_date', $project->start_date ?? '') }}" />
+            <x-text-input id="start_date" name="start_date" type="text" inputmode="numeric" pattern="\d{2}-\d{2}-\d{4}" placeholder="dd-mm-yyyy" class="mt-1 block w-full"
+                          value="{{ old('start_date', ($editing && !empty($project->start_date)) ? \Illuminate\Support\Carbon::parse($project->start_date)->format('d-m-Y') : '') }}" />
             <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="deadline" value="Deadline" />
-            <x-text-input id="deadline" name="deadline" type="date" class="mt-1 block w-full"
-                          value="{{ old('deadline', $project->deadline ?? '') }}" />
+            <x-text-input id="deadline" name="deadline" type="text" inputmode="numeric" pattern="\d{2}-\d{2}-\d{4}" placeholder="dd-mm-yyyy" class="mt-1 block w-full"
+                          value="{{ old('deadline', ($editing && !empty($project->deadline)) ? \Illuminate\Support\Carbon::parse($project->deadline)->format('d-m-Y') : '') }}" />
             <x-input-error :messages="$errors->get('deadline')" class="mt-2" />
         </div>
     </div>
