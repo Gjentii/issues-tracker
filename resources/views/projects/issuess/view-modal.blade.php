@@ -40,6 +40,11 @@
                 <div class="text-sm text-gray-500">Description</div>
                 <p id="view-issue-description" class="mt-1 text-sm leading-6 text-gray-700 whitespace-pre-line"></p>
             </div>
+
+            <div>
+                <div class="text-sm text-gray-500">Tags</div>
+                <div id="view-issue-tags" class="mt-2 flex flex-wrap gap-2"></div>
+            </div>
         </div>
 
         <div class="mt-6 flex justify-end">

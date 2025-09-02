@@ -63,6 +63,7 @@
                data-status="{{ $issue->status }}"
                data-priority="{{ $issue->priority }}"
                data-due_date="{{ $issue->due_date }}"
+               data-tags='@json($issue->tags->map(fn($t) => ["name" => $t->name, "color" => $t->color])->values())'
                data-project="{{ optional($issue->project)->name }}"
                class="inline-flex h-9 items-center rounded-md border border-gray-300 bg-white px-3 text-xs font-medium text-gray-700 hover:bg-gray-50">
                View
