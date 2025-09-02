@@ -23,14 +23,16 @@
                             <x-slot name="header">
                                 <th>Name</th>
                                 <th>Descriptions</th>
-                                <th>Created At</th>
+                                <th>Start Date</th>
+                                <th>Deadline</th>
                                 <th>Actions</th>
                             </x-slot>
                             @foreach($projects as $project)
                                 <tr id="project-row-{{ $project->id }}">
-                                    <td>{{$project->name}}</td>
-                                    <td>{{$project->description}}</td>
-                                    <td>{{$project->created_at}}</td>
+                                    <td>{{ $project->name }}</td>
+                                    <td>{{ $project->description }}</td>
+                                    <td>{{ $project->start_date ?? '' }}</td>
+                                    <td>{{ $project->deadline ?? '' }}</td>
                                     <td class="p-3 gap-3">
                                         <div class="flex items-center gap-3">
                                             <a class="text-blue-700 hover:!text-blue-800 font-medium" href="{{ route('projects.show', $project) }}">View</a>

@@ -23,7 +23,9 @@ class ProjectRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string', 'min:3'],
+            'description' => ['required', 'string', 'min:3'],
+            'start_date' => ['required', 'date'],
+            'deadline' => ['required', 'date', 'after_or_equal:start_date'],
         ];
     }
 }

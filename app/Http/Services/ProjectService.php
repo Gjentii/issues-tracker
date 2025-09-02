@@ -11,6 +11,8 @@ class ProjectService extends ModelService
     public array $data = [
         'name' => null,
         'description' => null,
+        'start_date' => null,
+        'deadline' => null,
     ];
 
     public function updateOrCreate(): Project|Model
@@ -18,6 +20,8 @@ class ProjectService extends ModelService
         $this->model->updateOrCreate(['id' => $this->model->id],[
             'name' => data_get($this->data, 'name'),
             'description' => data_get($this->data, 'description'),
+            'start_date' => data_get($this->data, 'start_date'),
+            'deadline' => data_get($this->data, 'deadline'),
         ]);
 
         return $this->model;

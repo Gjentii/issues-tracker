@@ -11,6 +11,20 @@
             <h2 class="text-lg font-medium text-gray-900">{{ __('Project Description') }}: </h2>
             <p class="text-md text-gray-600">{{ $project->description }}</p>
         </div>
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-medium uppercase text-gray-500">{{ __('Start Date') }}</span>
+                <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-sm text-gray-800">
+                    {{ $project->start_date ? \Illuminate\Support\Carbon::parse($project->start_date)->toFormattedDateString() : '—' }}
+                </span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-medium uppercase text-gray-500">{{ __('Deadline') }}</span>
+                <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-sm text-gray-800">
+                    {{ $project->deadline ? \Illuminate\Support\Carbon::parse($project->deadline)->toFormattedDateString() : '—' }}
+                </span>
+            </div>
+        </div>
     </x-card-section>
 
     <x-card-section>
