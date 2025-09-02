@@ -1,13 +1,13 @@
 <!-- Issue View Modal -->
-<div id="issue-view-modal" class="fixed inset-0 z-50 hidden items-center justify-center">
+<div id="issue-view-modal" class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto">
     <div class="absolute inset-0 bg-gray-900/60" data-close="issue-view-modal"></div>
-    <div class="relative w-full max-w-2xl rounded-lg bg-white p-6 shadow-lg">
-        <div class="flex items-center justify-between">
+    <div class="relative w-full max-w-2xl mx-4 my-8 rounded-lg bg-white shadow-lg flex flex-col max-h-screen min-h-0 overflow-hidden">
+        <div class="flex items-center justify-between p-6 border-b">
             <h4 class="text-lg font-semibold text-gray-900">Issue Details</h4>
             <button type="button" id="issue-view-close" class="rounded p-1 text-gray-500 hover:bg-gray-100">✕</button>
         </div>
 
-        <div class="mt-4 space-y-4">
+        <div class="p-6 pt-4 space-y-4 flex-1 overflow-y-auto min-h-0">
             <div class="flex items-start justify-between gap-6">
                 <div>
                     <div class="text-sm text-gray-500">Title</div>
@@ -48,7 +48,15 @@
 
             <div>
                 <div class="text-sm font-semibold text-gray-900 mb-2">Comments</div>
-                <ul id="view-issue-comments-list" class="space-y-3 mb-3 max-h-52 overflow-auto"></ul>
+                <ul id="view-issue-comments-list" class="space-y-3 mb-2 max-h-52 overflow-auto"></ul>
+                <div class="flex items-center justify-between mb-3" id="view-issue-comments-pagination">
+                    <div class="flex items-center gap-2">
+                        <button type="button" id="view-issue-comments-prev" class="inline-flex h-8 items-center rounded-md border border-gray-300 bg-white px-2 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">Back</button>
+                        <button type="button" id="view-issue-comments-next" class="inline-flex h-8 items-center rounded-md border border-gray-300 bg-white px-2 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+                    </div>
+                    <div id="view-issue-comments-page" class="text-xs text-gray-500"></div>
+                </div>
+                <div id="view-issue-comments-loading" class="text-xs text-gray-500 mb-3 hidden">Loading…</div>
                 <form id="view-issue-comment-form" class="flex items-start gap-2">
                     @csrf
                     <input type="text" id="view-issue-comment-input" name="content" placeholder="Add a comment..." class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" />
@@ -58,7 +66,7 @@
             </div>
         </div>
 
-        <div class="mt-6 flex justify-end">
+        <div class="p-6 border-t flex justify-end">
             <button type="button" id="issue-view-ok" class="inline-flex h-9 items-center rounded-md bg-gray-800 px-3 text-xs font-medium text-white shadow-sm hover:bg-gray-700">Close</button>
         </div>
     </div>

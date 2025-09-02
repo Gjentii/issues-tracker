@@ -10,10 +10,26 @@ class CommentController extends Controller
 {
     public function index(Issue $issue): JsonResponse
     {
-        $items = $issue->comments()
+        $comments = $issue->comments()
             ->latest()
-            ->get(['id','content','created_at']);
-        return response()->json($items);
+            ->paginate(3, ['id','content','created_at']);
+
+        $items = $comments->getCollection()->map(function ($c) {
+            return [
+                'id' => $c->id,
+                'content' => $c->content,
+                'created_at' => optional($c->created_at)->toIso8601String(),
+            ];
+        })->values();
+
+        return response()->json([
+            'data' => $items,
+            'current_page' => $comments->currentPage(),
+            'next_page_url' => $comments->nextPageUrl(),
+            'last_page' => $comments->lastPage(),
+            'per_page' => $comments->perPage(),
+            'total' => $comments->total(),
+        ]);
     }
 
     public function store(Request $request, Issue $issue): JsonResponse

@@ -117,6 +117,5 @@
 
   btnClose && btnClose.addEventListener('click', close);
   btnOk && btnOk.addEventListener('click', close);
-  overlay && overlay.addEventListener('click', close);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  // Do not close on overlay click or ESC for view modal
 })();
