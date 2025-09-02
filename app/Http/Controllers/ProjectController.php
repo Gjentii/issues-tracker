@@ -73,7 +73,7 @@ class ProjectController extends Controller
 
     public function create()
     {
-        return view('projects.create');
+        return view('projects.edit-create');
     }
 
     public function store(ProjectRequest $request, Project $project)
@@ -85,7 +85,7 @@ class ProjectController extends Controller
     }
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        return view('projects.edit-create', compact('project'));
     }
 
     public function update(ProjectRequest $request, Project $project)
