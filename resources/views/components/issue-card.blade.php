@@ -58,6 +58,9 @@
         @if($viewUrl)
             <a href="#" role="button"
                data-open-modal="issue-view-modal"
+               data-issue_id="{{ $issue->id }}"
+               data-comments_url="{{ route('issues.comments.store', $issue) }}"
+               data-comments_index_url="{{ route('issues.comments.index', $issue) }}"
                data-title="{{ $issue->title }}"
                data-description="{{ $issue->description }}"
                data-status="{{ $issue->status }}"

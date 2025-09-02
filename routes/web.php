@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IssueController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TagController;
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('tags/table', [TagController::class, 'table'])->name('tags.table');
 
     Route::resource('issues', IssueController::class);
+    Route::get('issues/{issue}/comments', [CommentController::class, 'index'])->name('issues.comments.index');
+    Route::post('issues/{issue}/comments', [CommentController::class, 'store'])->name('issues.comments.store');
 });
 
 

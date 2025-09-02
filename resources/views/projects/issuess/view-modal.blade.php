@@ -45,6 +45,17 @@
                 <div class="text-sm text-gray-500">Tags</div>
                 <div id="view-issue-tags" class="mt-2 flex flex-wrap gap-2"></div>
             </div>
+
+            <div>
+                <div class="text-sm font-semibold text-gray-900 mb-2">Comments</div>
+                <ul id="view-issue-comments-list" class="space-y-3 mb-3 max-h-52 overflow-auto"></ul>
+                <form id="view-issue-comment-form" class="flex items-start gap-2">
+                    @csrf
+                    <input type="text" id="view-issue-comment-input" name="content" placeholder="Add a comment..." class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm" />
+                    <x-primary-button type="submit" id="view-issue-comment-submit">Post</x-primary-button>
+                </form>
+                <p id="view-issue-comment-error" class="mt-1 text-xs text-red-600 hidden"></p>
+            </div>
         </div>
 
         <div class="mt-6 flex justify-end">
@@ -55,4 +66,5 @@
 
 <script>
 {!! file_get_contents(resource_path('js/projects/issues/view-modal.js')) !!}
+{!! file_get_contents(resource_path('js/projects/issues/comments.js')) !!}
 </script>

@@ -12,6 +12,7 @@
   const elStatus = document.getElementById('view-issue-status');
   const elPriority = document.getElementById('view-issue-priority');
   const elTags = document.getElementById('view-issue-tags');
+  const commentsList = document.getElementById('view-issue-comments-list');
 
   function setBadge(el, value, map){
     if (!el) return;
@@ -43,6 +44,17 @@
     if (elProject) elProject.textContent = ds.project || '—';
     setBadge(elStatus, ds.status, statusMap);
     setBadge(elPriority, ds.priority, priorityMap);
+
+    // Wire comments endpoint + reset list
+    if (ds.comments_url) modal.dataset.commentsUrl = ds.comments_url;
+    if (ds.comments_index_url) modal.dataset.commentsIndexUrl = ds.comments_index_url;
+    if (ds.issue_id) modal.dataset.issueId = ds.issue_id;
+    if (commentsList) commentsList.innerHTML = '';
+
+    // Wire comments endpoint + reset list
+    if (ds.comments_url) modal.dataset.commentsUrl = ds.comments_url;
+    if (ds.issue_id) modal.dataset.issueId = ds.issue_id;
+    if (commentsList) commentsList.innerHTML = '';
 
     // Render tags
     if (elTags){
@@ -80,6 +92,15 @@
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     document.body.classList.add('overflow-hidden');
+
+    // Notify listeners (e.g., comments.js) to load comments
+    const evt = new CustomEvent('issue-view-open', {
+      detail: {
+        issueId: modal.dataset.issueId,
+        commentsIndexUrl: modal.dataset.commentsIndexUrl,
+      }
+    });
+    document.dispatchEvent(evt);
   }
 
   function close(){
