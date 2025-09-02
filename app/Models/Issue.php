@@ -24,6 +24,6 @@ class Issue extends Model
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'issue_tag');
+        return $this->belongsToMany(Tag::class, 'issues_tags');
     }
 }

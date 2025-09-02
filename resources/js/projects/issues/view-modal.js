@@ -11,6 +11,7 @@
   const elProject = document.getElementById('view-issue-project');
   const elStatus = document.getElementById('view-issue-status');
   const elPriority = document.getElementById('view-issue-priority');
+  const elTags = document.getElementById('view-issue-tags');
 
   function setBadge(el, value, map){
     if (!el) return;
@@ -43,6 +44,39 @@
     setBadge(elStatus, ds.status, statusMap);
     setBadge(elPriority, ds.priority, priorityMap);
 
+    // Render tags
+    if (elTags){
+      elTags.innerHTML = '';
+      try {
+        const list = ds.tags ? JSON.parse(ds.tags) : [];
+        if (Array.isArray(list) && list.length){
+          list.forEach(t => {
+            const wrap = document.createElement('span');
+            wrap.className = 'inline-flex items-center gap-2 text-xs border border-gray-300 rounded-md px-2 py-1';
+            const dot = document.createElement('span');
+            dot.className = 'inline-block h-3 w-3 rounded-full';
+            dot.style.background = (t && t.color) ? t.color : '#e5e7eb';
+            const name = document.createElement('span');
+            name.className = 'text-gray-700';
+            name.textContent = (t && t.name) ? t.name : '';
+            wrap.appendChild(dot);
+            wrap.appendChild(name);
+            elTags.appendChild(wrap);
+          });
+        } else {
+          const none = document.createElement('span');
+          none.className = 'text-sm text-gray-500';
+          none.textContent = 'No tags';
+          elTags.appendChild(none);
+        }
+      } catch (_) {
+        const none = document.createElement('span');
+        none.className = 'text-sm text-gray-500';
+        none.textContent = 'No tags';
+        elTags.appendChild(none);
+      }
+    }
+
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     document.body.classList.add('overflow-hidden');
@@ -65,4 +99,3 @@
   overlay && overlay.addEventListener('click', close);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();
-

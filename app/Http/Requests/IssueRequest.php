@@ -28,6 +28,9 @@ class IssueRequest extends FormRequest
             'status' => ['required', 'in:open,in_progress,closed'],
             'priority' => ['required', 'in:low,medium,high'],
             'due_date' => ['required', 'date'],
+            // tags are optional; when provided they must be valid tag IDs
+            'tags' => ['sometimes', 'array'],
+            'tags.*' => ['integer', 'exists:tags,id'],
         ];
     }
 }
