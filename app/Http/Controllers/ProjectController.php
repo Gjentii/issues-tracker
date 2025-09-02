@@ -8,8 +8,7 @@ use App\Models\Project;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
-{
+class ProjectController extends Controller {
     public function saveData(ProjectRequest $request, Project $project): Project
     {
         return (new ProjectService())
@@ -85,17 +84,20 @@ class ProjectController extends Controller
     }
     public function edit(Project $project)
     {
+        $this->authorize('update', $project);
         return view('projects.edit-create', compact('project'));
     }
 
     public function update(ProjectRequest $request, Project $project)
     {
+        $this->authorize('update', $project);
         $this->saveData($request, $project);
         return redirect()->route('projects.index');
     }
 
     public function destroy(Project $project)
     {
+        $this->authorize('delete', $project);
         $project->delete();
 
         return redirect()->route('projects.index');

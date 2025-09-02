@@ -17,11 +17,13 @@ class ProjectService extends ModelService
 
     public function updateOrCreate(): Project|Model
     {
+        $isNew = !$this->model->exists || empty($this->model->id);
         $this->model->updateOrCreate(['id' => $this->model->id],[
             'name' => data_get($this->data, 'name'),
             'description' => data_get($this->data, 'description'),
             'start_date' => data_get($this->data, 'start_date'),
             'deadline' => data_get($this->data, 'deadline'),
+            'owner_id' => $isNew ? (auth()->id() ?? null) : ($this->model->owner_id ?? null),
         ]);
 
         return $this->model;

@@ -36,7 +36,10 @@
                                     <td class="p-3 gap-3">
                                         <div class="flex items-center gap-3">
                                             <a class="text-blue-700 hover:!text-blue-800 font-medium" href="{{ route('projects.show', $project) }}">View</a>
+                                            @can('update', $project)
                                             <a class="!text-blue-700 hover:!text-blue-800 font-medium" href="{{ route('projects.edit', $project) }}">Edit</a>
+                                            @endcan
+                                            @can('delete', $project)
                                             <button type="button"
                                                     data-open-modal="delete-modal"
                                                     data-action="{{ route('projects.destroy', $project) }}"
@@ -46,6 +49,7 @@
                                                     class="text-red-600 hover:underline">
                                                 Delete
                                             </button>
+                                            @endcan
                                         </div>
                                     </td>
                                 </tr>
