@@ -79,8 +79,9 @@
                data-status="{{ $issue->status }}"
                data-priority="{{ $issue->priority }}"
                data-due_date="{{ $issue->due_date }}"
+               data-tags="{{ $issue->tags->pluck('id')->join(',') }}"
                data-replace="#{{ $cardId }}"
-               data-success="#issues-success"
+                data-success="#issues-success"
                data-success-message="Issue updated successfully."
                class="inline-flex h-9 items-center rounded-md bg-blue-600 px-3 text-xs font-medium text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors">
                Edit

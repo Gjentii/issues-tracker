@@ -46,6 +46,27 @@
         }
       }
     }
+
+    // Handle tag checkboxes
+    const tagInputs = form.querySelectorAll('input[name="tags[]"]');
+    if (tagInputs && tagInputs.length){
+      if (mode === 'edit'){
+        const tagStr = opener?.dataset?.tags || '';
+        const selected = new Set(
+          tagStr
+            .split(',')
+            .map(s => parseInt(s.trim(), 10))
+            .filter(n => !Number.isNaN(n))
+        );
+        tagInputs.forEach(cb => {
+          const id = parseInt(cb.value, 10);
+          cb.checked = selected.has(id);
+        });
+      } else {
+        // create mode: clear all
+        tagInputs.forEach(cb => { cb.checked = false; });
+      }
+    }
     form.dataset.mode = mode;
     // For replacement on success
     form.dataset.replace = opener?.dataset?.replace || '';
