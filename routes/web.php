@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('projects', ProjectController::class);
+    Route::get('projects/{project}/issues', [ProjectController::class, 'issues'])->name('projects.issues');
     Route::resource('tags', TagController::class)->only(['index', 'store',]);
 
     Route::post('tags/validate', [TagController::class, 'validateAjax'])->name('tags.validate');
