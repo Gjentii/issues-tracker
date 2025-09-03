@@ -32,7 +32,9 @@
     p.textContent = item?.content ?? '';
     const meta = document.createElement('div');
     meta.className = 'mt-1 text-xs text-gray-500';
-    meta.textContent = item?.created_at ? new Date(item.created_at).toLocaleString() : '';
+    const when = item?.created_at ? new Date(item.created_at).toLocaleString() : '';
+    const who = item?.author_name ? String(item.author_name) : '';
+    meta.textContent = who && when ? `${who} • ${when}` : (who || when);
     li.appendChild(p);
     li.appendChild(meta);
     return li;

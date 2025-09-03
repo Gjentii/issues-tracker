@@ -12,13 +12,15 @@ class CommentController extends Controller
     {
         $comments = $issue->comments()
             ->latest()
-            ->paginate(3, ['id','content','created_at']);
+            ->with('user:id,name')
+            ->paginate(3, ['id','content','created_at','user_id']);
 
         $items = $comments->getCollection()->map(function ($c) {
             return [
                 'id' => $c->id,
                 'content' => $c->content,
                 'created_at' => optional($c->created_at)->toIso8601String(),
+                'author_name' => $c->user?->name,
             ];
         })->values();
 
@@ -39,6 +41,7 @@ class CommentController extends Controller
         ]);
 
         $comment = $issue->comments()->create([
+            'user_id' => $request->user()->id,
             'content' => $data['content'],
         ]);
 
@@ -46,6 +49,7 @@ class CommentController extends Controller
             'id' => $comment->id,
             'content' => $comment->content,
             'created_at' => $comment->created_at?->toIso8601String(),
+            'author_name' => $request->user()->name,
         ], 201);
     }
 }
