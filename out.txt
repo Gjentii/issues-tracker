@@ -1,0 +1,7 @@
+(() => {
+  if (window.__issueMembersInit) return;
+  window.__issueMembersInit = true;
+  const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+
+  function rende
+
