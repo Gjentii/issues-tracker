@@ -1,7 +1,40 @@
-(() => {
-  if (window.__issueMembersInit) return;
-  window.__issueMembersInit = true;
-  const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-
-  function rende
-
+1 `t<?php 
+2 `t 
+3 `tuse App\Http\Controllers\IssueController; 
+4 `tuse App\Http\Controllers\CommentController; 
+5 `tuse App\Http\Controllers\ProfileController; 
+6 `tuse App\Http\Controllers\ProjectController; 
+7 `tuse App\Http\Controllers\TagController; 
+8 `tuse Illuminate\Support\Facades\Route; 
+9 `t 
+10 `tRoute::redirect('/', '/login'); 
+11 `t 
+12 `t// Removed dashboard route; users are redirected to projects index after login 
+13 `t 
+14 `tRoute::middleware('auth')->group(function () { 
+15 `t    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit'); 
+16 `t    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update'); 
+17 `t    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
+18 `t 
+19 `t    Route::resource('projects', ProjectController::class); 
+20 `t    Route::get('projects/{project}/issues', [ProjectController::class, 'issues'])->name('projects.issues'); 
+21 `t    Route::resource('tags', TagController::class)->only(['index', 'store',]); 
+22 `t 
+23 `t    Route::post('tags/validate', [TagController::class, 'validateAjax'])->name('tags.validate'); 
+24 `t    Route::get('tags/table', [TagController::class, 'table'])->name('tags.table'); 
+25 `t 
+26 `t    Route::resource('issues', IssueController::class); 
+27 `t    Route::get('issues/{issue}/members', [IssueController::class, 'members'])->name('issues.members.index'); 
+28 `t    Route::post('issues/{issue}/members', [IssueController::class, 'addMember'])->name('issues.members.store'); 
+29 `t    Route::delete('issues/{issue}/members/{user}', [IssueController::class, 'removeMember'])->name('issues.members.destroy'); 
+30 `t    Route::get('issues/{issue}/comments', [CommentController::class, 'index'])->name('issues.comments.index'); 
+31 `t    Route::post('issues/{issue}/comments', [CommentController::class, 'store'])->name('issues.comments.store'); 
+32 `t}); 
+33 `t 
+34 `t 
+35 `trequire __DIR__.'/auth.php'; 
+36 `t 
+37 `t// Fallback: redirect any unknown/invalid route to projects index 
+38 `tRoute::fallback(function () { 
+39 `t    return redirect()->route('projects.index'); 
+40 `t}); 

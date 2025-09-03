@@ -7,13 +7,9 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/login');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Removed dashboard route; users are redirected to projects index after login
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,3 +33,8 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__.'/auth.php';
+
+// Fallback: redirect any unknown/invalid route to projects index
+Route::fallback(function () {
+    return redirect()->route('projects.index');
+});
