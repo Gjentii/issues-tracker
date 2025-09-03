@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Database\Seeders\TagSeeder;
+use Database\Seeders\ProjectSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,16 +20,24 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Argjend',
-            'email' => 'ar@mail.com',
+            'name' => 'Argjend Kurteshi',
+            'email' => 'arku@pritech.eu',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
 
         User::factory()->create([
-            'name' => 'Test',
-            'email' => 'test@mail.com',
+            'name' => 'Test User',
+            'email' => 'test@pritech.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::factory()->create([
+            'name' => 'Filan Fisteku',
+            'email' => 'filan@pritech.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
@@ -36,5 +45,8 @@ class DatabaseSeeder extends Seeder
 
         // Seed default tags
         $this->call(TagSeeder::class);
+
+        // Seed demo projects
+        $this->call(ProjectSeeder::class);
     }
 }
