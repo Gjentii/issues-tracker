@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Database\Seeders\TagSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -32,5 +33,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
+
+        // Seed default tags
+        $this->call(TagSeeder::class);
     }
 }
