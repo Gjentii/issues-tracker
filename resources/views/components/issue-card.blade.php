@@ -78,6 +78,7 @@
                data-mode="edit"
                data-action="{{ route('issues.update', $issue) }}"
                data-method="PUT"
+               data-issue_id="{{ $issue->id }}"
                data-title="{{ $issue->title }}"
                data-description="{{ $issue->description }}"
                data-status="{{ $issue->status }}"

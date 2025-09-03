@@ -31,6 +31,9 @@ class IssueRequest extends FormRequest
             // tags are optional; when provided they must be valid tag IDs
             'tags' => ['sometimes', 'array'],
             'tags.*' => ['integer', 'exists:tags,id'],
+            // optional members on create/update
+            'members' => ['sometimes', 'array'],
+            'members.*' => ['integer', 'exists:users,id'],
         ];
     }
 }

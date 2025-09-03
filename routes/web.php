@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::get('tags/table', [TagController::class, 'table'])->name('tags.table');
 
     Route::resource('issues', IssueController::class);
+    Route::get('issues/{issue}/members', [IssueController::class, 'members'])->name('issues.members.index');
+    Route::post('issues/{issue}/members', [IssueController::class, 'addMember'])->name('issues.members.store');
+    Route::delete('issues/{issue}/members/{user}', [IssueController::class, 'removeMember'])->name('issues.members.destroy');
     Route::get('issues/{issue}/comments', [CommentController::class, 'index'])->name('issues.comments.index');
     Route::post('issues/{issue}/comments', [CommentController::class, 'store'])->name('issues.comments.store');
 });

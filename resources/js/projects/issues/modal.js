@@ -26,6 +26,7 @@
     // Defaults for create
     form.action = opener?.dataset?.action || form.action;
     setMethod(opener?.dataset?.method || 'POST');
+    if (opener?.dataset?.issue_id){ form.dataset.issueId = opener.dataset.issue_id; } else { delete form.dataset.issueId; }
 
     if (titleEl) titleEl.textContent = mode === 'edit' ? 'Edit Issue' : 'Create Issue';
     if (submitBtn) submitBtn.textContent = mode === 'edit' ? 'Update' : 'Create';

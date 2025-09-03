@@ -6,6 +6,7 @@ use App\Http\Requests\ProjectRequest;
 use App\Http\Services\ProjectService;
 use App\Models\Project;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller {
@@ -67,7 +68,8 @@ class ProjectController extends Controller {
             'high' => 'High',
         ];
 
-        return view('projects.show', compact('project', 'issues', 'tags', 'statuses', 'priorities'));
+        $users = User::query()->orderBy('name')->get(['id','name','email']);
+        return view('projects.show', compact('project', 'issues', 'tags', 'statuses', 'priorities', 'users'));
     }
 
     public function create()

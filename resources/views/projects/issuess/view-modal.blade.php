@@ -46,6 +46,24 @@
                 <div id="view-issue-tags" class="mt-2 flex flex-wrap gap-2"></div>
             </div>
 
+            <div class="pt-3 border-t">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm font-medium text-gray-700">Members</div>
+                    <button type="button" id="view-issue-members-add-btn" class="inline-flex h-8 items-center rounded-md border border-gray-300 bg-white px-2.5 text-xs font-medium text-gray-700 hover:bg-gray-50">+ Add member</button>
+                </div>
+                <div id="view-issue-members-list" class="mt-2 flex flex-wrap gap-2"></div>
+                <div id="view-issue-members-add-row" class="mt-3 hidden items-center gap-2">
+                    <select id="view-issue-members-select" class="h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
+                        <option value="">Select a user...</option>
+                        @foreach(($users ?? collect()) as $u)
+                            <option value="{{ $u->id }}">{{ $u->name }} ({{ $u->email }})</option>
+                        @endforeach
+                    </select>
+                    <x-primary-button type="button" id="view-issue-members-attach" class="h-9">Attach</x-primary-button>
+                    <button type="button" id="view-issue-members-cancel" class="inline-flex h-9 items-center rounded-md border border-gray-300 bg-white px-3 text-xs font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+                </div>
+            </div>
+
             @include('projects.issuess.partials.comments')
         </div>
 
@@ -58,4 +76,5 @@
 <script>
 {!! file_get_contents(resource_path('js/projects/issues/view-modal.js')) !!}
 {!! file_get_contents(resource_path('js/projects/issues/comments.js')) !!}
+{!! file_get_contents(resource_path('js/projects/issues/members.js')) !!}
 </script>

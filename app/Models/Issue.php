@@ -28,6 +28,11 @@ class Issue extends Model
         return $this->belongsToMany(Tag::class, 'issues_tags');
     }
 
+    public function members(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'issues_users')->withTimestamps();
+    }
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
