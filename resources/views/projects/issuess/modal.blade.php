@@ -43,7 +43,7 @@
                 </div>
                 <div>
                     <x-input-label for="issue-due-date" value="Due Date" />
-                    <input id="issue-due-date" name="due_date" type="text" inputmode="numeric" pattern="\d{2}-\d{2}-\d{4}" placeholder="dd-mm-yyyy" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                    <input id="issue-due-date" name="due_date" type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                     <ul id="error-due_date" class="mt-2 text-sm text-red-600 space-y-1 hidden"></ul>
                 </div>
             </div>

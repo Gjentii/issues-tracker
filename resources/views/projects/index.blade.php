@@ -31,8 +31,8 @@
                                 <tr id="project-row-{{ $project->id }}">
                                     <td>{{ $project->name }}</td>
                                     <td>{{ $project->description }}</td>
-                                    <td>{{ $project->start_date ?? '' }}</td>
-                                    <td>{{ $project->deadline ?? '' }}</td>
+                                    <td>{{ !empty($project->start_date) ? \Illuminate\Support\Carbon::parse($project->start_date)->format('d-m-Y') : '' }}</td>
+                                    <td>{{ !empty($project->deadline) ? \Illuminate\Support\Carbon::parse($project->deadline)->format('d-m-Y') : '' }}</td>
                                     <td class="p-3 gap-3">
                                         <div class="flex items-center gap-3">
                                             <a class="text-blue-700 hover:!text-blue-800 font-medium" href="{{ route('projects.show', $project) }}">View</a>

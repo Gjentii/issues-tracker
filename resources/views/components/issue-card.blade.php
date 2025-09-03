@@ -50,7 +50,7 @@
         @endif
 
         @if($due)
-            <div class="mt-1 text-xs text-gray-500">Due: <span class="font-medium text-gray-700">{{ \Illuminate\Support\Carbon::parse($due)->toFormattedDateString() }}</span></div>
+            <div class="mt-1 text-xs text-gray-500">Due: <span class="font-medium text-gray-700">{{ \Illuminate\Support\Carbon::parse($due)->format('d-m-Y') }}</span></div>
         @endif
     </div>
 

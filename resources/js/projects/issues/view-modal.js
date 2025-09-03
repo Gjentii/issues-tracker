@@ -14,6 +14,20 @@
   const elTags = document.getElementById('view-issue-tags');
   const commentsList = document.getElementById('view-issue-comments-list');
 
+  function formatToDDMMYYYY(value){
+    if (!value) return '—';
+    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(value);
+    if (m) return `${m[3]}-${m[2]}-${m[1]}`;
+    try {
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return value;
+      const dd = String(d.getDate()).padStart(2,'0');
+      const mm = String(d.getMonth()+1).padStart(2,'0');
+      const yyyy = d.getFullYear();
+      return `${dd}-${mm}-${yyyy}`;
+    } catch (_) { return value; }
+  }
+
   function setBadge(el, value, map){
     if (!el) return;
     if (!value){ el.classList.add('hidden'); el.textContent = ''; return; }
@@ -40,7 +54,7 @@
     const ds = opener?.dataset || {};
     if (elTitle) elTitle.textContent = ds.title || '—';
     if (elDesc) elDesc.textContent = ds.description || '';
-    if (elDue) elDue.textContent = ds.due_date || '—';
+    if (elDue) elDue.textContent = formatToDDMMYYYY(ds.due_date);
     if (elProject) elProject.textContent = ds.project || '—';
     setBadge(elStatus, ds.status, statusMap);
     setBadge(elPriority, ds.priority, priorityMap);

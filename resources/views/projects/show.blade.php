@@ -15,13 +15,13 @@
             <div class="flex items-center gap-2">
                 <span class="text-xs font-medium uppercase text-gray-500">{{ __('Start Date') }}</span>
                 <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-sm text-gray-800">
-                    {{ $project->start_date ? \Illuminate\Support\Carbon::parse($project->start_date)->toFormattedDateString() : '—' }}
+                    {{ $project->start_date ? \Illuminate\Support\Carbon::parse($project->start_date)->format('d-m-Y') : '—' }}
                 </span>
             </div>
             <div class="flex items-center gap-2">
                 <span class="text-xs font-medium uppercase text-gray-500">{{ __('Deadline') }}</span>
                 <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-sm text-gray-800">
-                    {{ $project->deadline ? \Illuminate\Support\Carbon::parse($project->deadline)->toFormattedDateString() : '—' }}
+                    {{ $project->deadline ? \Illuminate\Support\Carbon::parse($project->deadline)->format('d-m-Y') : '—' }}
                 </span>
             </div>
         </div>
